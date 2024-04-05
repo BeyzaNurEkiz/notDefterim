@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -30,8 +32,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -51,6 +53,18 @@ android {
 
 dependencies {
 
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+    //composeBom sürüm belirtmedim.
+
+    /*
+    kotlinbom hata veriyor
+    val kotlinBom = platform(org.jetbrains.kotlin.)
+    implementation(kotlinBom)
+    */
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -66,4 +80,28 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+
+    //accompanist
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.31.5-beta")
+
+    // extended Icons
+    implementation ("androidx.compose.material:material-icons-extended")
+
+    // Navigation Compose
+    implementation("androidx.navigation:navigation-compose")
+
+    // Dagger - Hilt
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
+
+
+    val room_version = "2.5.1"
+    implementation ("androidx.room:room-runtime:$room_version")
+    implementation ("androidx.room:room-ktx:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    testImplementation ("androidx.room:room-testing:$room_version")
+    androidTestImplementation ("androidx.room:room-testing:$room_version")
+
 }
