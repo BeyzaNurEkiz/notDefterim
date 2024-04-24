@@ -36,7 +36,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
     buildFeatures {
         compose = true
@@ -59,6 +59,8 @@ dependencies {
 
     //composeBom sürüm belirtmedim.
 
+    val kotlinBom = platform("org.jetbrains.kotlin:kotlin-bom:1.5.31") // Kotlin sürümünü burada belirtin
+    implementation(kotlinBom)
     /*
     kotlinbom hata veriyor
     val kotlinBom = platform(org.jetbrains.kotlin.)

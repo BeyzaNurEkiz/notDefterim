@@ -16,17 +16,17 @@ interface NoteDao {
     // Query: Sorgu
     @Query("SELECT * FROM notes ORDER BY createdDate")
     fun getAllNotes(): Flow<List<Note>>
-    @Query("SELECT * FROM notes WHERE id=:id ORDER BY createdDate" )
+    @Query("SELECT * FROM notes WHERE id=:id" )
     fun getNoteById(id:Long): Flow<Note>
 
     @Insert(onConflict=OnConflictStrategy.REPLACE)
-    suspend fun insertNote(note: Note)
+     fun insertNote(note: Note)
 
     @Update(onConflict=OnConflictStrategy.REPLACE)
-    suspend fun update(note: Note)
+     fun update(note: Note)
 
     @Query("DELETE FROM notes WHERE id=:id")
-    suspend fun delete(id:Long)
+     fun delete(id:Long)
 
     @Query("SELECT * FROM notes WHERE isBookMarked=1 ORDER BY createdDate DESC")
     fun getBookmarkedNotes(): Flow<List<Note>>

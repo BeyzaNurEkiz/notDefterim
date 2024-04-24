@@ -1,6 +1,6 @@
 package com.example.notdefterim.data.local
 
-import android.provider.ContactsContract.CommonDataKinds.Note
+import com.example.notdefterim.data.local.model.Note
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
