@@ -1,8 +1,9 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
-    kotlin("kapt")
+
+    id ("com.android.application")
+    id ("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
+    id ("kotlin-kapt")
 }
 
 android {
@@ -59,7 +60,7 @@ dependencies {
 
     //composeBom sürüm belirtmedim.
 
-    val kotlinBom = platform("org.jetbrains.kotlin:kotlin-bom:1.5.31") // Kotlin sürümünü burada belirtin
+    val kotlinBom = platform("org.jetbrains.kotlin:kotlin-bom:1.5.31")
     implementation(kotlinBom)
     /*
     kotlinbom hata veriyor
@@ -99,7 +100,7 @@ dependencies {
     implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
 
 
-    val room_version = "2.5.1"
+    val room_version = "2.6.1"
     implementation ("androidx.room:room-runtime:$room_version")
     implementation ("androidx.room:room-ktx:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
