@@ -28,10 +28,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.notdefterim.common.ScreenViewState
 import com.example.notdefterim.data.local.model.Note
-
+import java.util.Date
 
 
 @Composable
@@ -52,11 +53,15 @@ fun HomeScreen(
                 notes =notes,
                 modifier =modifier,
                 onBookmarkChange =onBookmarkChange,
-                onDeleteNote =onDeleteNote
-                on
-            ) {
-
-            }
+                onDeleteNote =onDeleteNote,
+                onNoteClicked = onNoteClicked
+            )
+        }
+        is ScreenViewState.Error -> {
+            Text(
+                text = state.notes.message ?: " Unknown Error ",
+                color = MaterialTheme.colorScheme.error
+            )
         }
     }
 }
@@ -154,3 +159,56 @@ fun NoteCard(
         }
     }
 }
+
+@Preview(showSystemUi = true)
+@Composable
+fun PrevHome(){
+    HomeScreen(
+        state = HomeState(
+            notes = ScreenViewState.Success(notes)
+        ),
+        onBookmarkChange ={},
+        onDeleteNote ={},
+        onNoteClicked = {}
+    )
+}
+
+val placeHolderText =
+" iasçşxasiçşd işçdaiçşdaisçşd iwçqiwşçdewşrmkşw qwşldöwqşldöş "
+
+val notes = listOf(
+    Note(
+        title= "Room Database",
+        content = placeHolderText + placeHolderText,
+        createdDate = Date()
+    ),
+    Note(
+        title= "Jatpack Compose",
+        content = "testing",
+        createdDate = Date(),
+        isBookMarked = true,
+    ),
+    Note(
+        title= "Room Database",
+        content = placeHolderText + placeHolderText,
+        createdDate = Date()
+    ),
+    Note(
+        title= "Jatpack Compose",
+        content = "testing",
+        createdDate = Date(),
+        isBookMarked = true,
+    )
+)
+
+
+
+
+
+
+
+
+
+
+
+
