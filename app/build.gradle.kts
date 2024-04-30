@@ -3,7 +3,7 @@ plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
-    id ("kotlin-kapt")
+    id ("com.google.devtools.ksp")
 }
 
 android {
@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.0"
     }
     packaging {
         resources {
@@ -54,57 +54,44 @@ android {
 
 dependencies {
 
-    val composeBom = platform(libs.androidx.compose.bom)
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
-
-    //composeBom sürüm belirtmedim.
-
-    val kotlinBom = platform("org.jetbrains.kotlin:kotlin-bom:1.5.31")
-    implementation(kotlinBom)
-    /*
-    kotlinbom hata veriyor
-    val kotlinBom = platform(org.jetbrains.kotlin.)
-    implementation(kotlinBom)
-    */
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
-
-
-    //accompanist
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.activity:activity-compose:1.8.0")
+    implementation(platform("androidx.compose:compose-bom:2024.04.01"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
+    implementation("com.google.dagger:hilt-android:2.48.1")
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
+    ksp("androidx.room:room-compiler:2.6.0")
+    ksp("com.google.dagger:dagger-compiler:2.48.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.48.1")
+    implementation(platform("io.github.jan-tennert.supabase:bom:1.4.6-dev-1"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.github.jan-tennert.supabase:realtime-kt")
+    implementation("io.github.jan-tennert.supabase:storage-kt")
+    implementation("io.github.jan-tennert.supabase:functions-kt")
+    implementation("io.github.jan-tennert.supabase:gotrue-kt")
+    implementation("io.github.jan-tennert.supabase:compose-auth")
+    implementation("io.github.jan-tennert.supabase:compose-auth-ui")
+    implementation("io.ktor:ktor-client-cio:2.3.5")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.04.01"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    val kotlinBom = platform("org.jetbrains.kotlin:kotlin-bom:1.8.0")
+    implementation (kotlinBom)
     implementation ("com.google.accompanist:accompanist-systemuicontroller:0.31.5-beta")
-
-    // extended Icons
-    implementation ("androidx.compose.material:material-icons-extended")
-
-    // Navigation Compose
     implementation("androidx.navigation:navigation-compose")
+    implementation ("androidx.compose.material:material-icons-extended")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
 
-    // Dagger - Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
-    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
-
-
-    val room_version = "2.6.1"
-    implementation ("androidx.room:room-runtime:$room_version")
-    implementation ("androidx.room:room-ktx:$room_version")
-    kapt("androidx.room:room-compiler:$room_version")
-    testImplementation ("androidx.room:room-testing:$room_version")
-    androidTestImplementation ("androidx.room:room-testing:$room_version")
+    implementation ("androidx.compose.foundation:foundation")
 
 }

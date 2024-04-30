@@ -86,7 +86,7 @@ private fun HomeDetail(
                 note = note,
                 onBookmarkChange = onBookmarkChange,
                 onDeleteNote = onDeleteNote,
-                onNoteClicked= onNoteClicked
+                onNoteClicked = onNoteClicked
             )
 
         }
@@ -98,7 +98,7 @@ private fun HomeDetail(
 fun NoteCard(
     index: Int,
     note: Note,
-    onBookmarkChange:(note:Note) -> Unit,
+    onBookmarkChange: (note: Note) -> Unit,
     onDeleteNote:(Long) ->Unit,
     onNoteClicked:(Long) ->Unit,
 ) {

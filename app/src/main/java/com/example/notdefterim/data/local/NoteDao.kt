@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.Flow
 interface NoteDao {
 
     //Note üzerinde oluşturduğumuz verileri burada sqlite ile çekiyoruz.
-    // Query: Sorgu
     @Query("SELECT * FROM notes ORDER BY createdDate")
     fun getAllNotes(): Flow<List<Note>>
     @Query("SELECT * FROM notes WHERE id=:id" )
