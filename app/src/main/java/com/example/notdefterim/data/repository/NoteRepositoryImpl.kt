@@ -3,7 +3,9 @@ package com.example.notdefterim.data.repository
 import com.example.notdefterim.data.local.NoteDao
 import com.example.notdefterim.data.local.model.Note
 import com.example.notdefterim.domain.repository.Repository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class NoteRepositoryImpl @Inject constructor(
@@ -18,15 +20,21 @@ class NoteRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insert(note: Note) {
-        noteDao.insertNote(note)
+        withContext(Dispatchers.IO) {
+            noteDao.insertNote(note)
+        }
     }
 
     override suspend fun update(note: Note) {
-        noteDao.update(note)
+        withContext(Dispatchers.IO) {
+            noteDao.update(note)
+        }
     }
 
     override suspend fun delete(id: Long) {
-        noteDao.delete(id)
+        withContext(Dispatchers.IO) {
+            noteDao.delete(id)
+        }
     }
 
     override fun getBookMarkedNotes(): Flow<List<Note>> {

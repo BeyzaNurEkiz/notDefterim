@@ -45,7 +45,7 @@ class HomeViewModel @Inject constructor(
         deleteNoteUseCase(noteId)
     }
 
-    fun bookMarkChange(note:Note){
+    fun onBookMarkChange(note:Note){
         viewModelScope.launch {
             updateNoteUseCase(note.copy(isBookMarked = !note.isBookMarked))
         }

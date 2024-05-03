@@ -12,8 +12,10 @@ import com.example.notdefterim.domain.use_cases.GetNoteByIdUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Date
 
 class DetailViewModel @AssistedInject constructor(
@@ -29,12 +31,17 @@ class DetailViewModel @AssistedInject constructor(
     private val note:Note
         get()= state.run {
             Note(
-                id,
-                title,
-                content,
-                createdDate
+                id= id,
+                title= title,
+                content= content,
+                createdDate= createdDate,
+                isBookMarked = isBookmark
             )
         }
+
+    init{
+        initialize()
+    }
 
     private fun initialize(){
         val isUpdatingNote= noteId != -1L   //-1L notun güncellenip güncellenmediğini kontrol eder. Eğer id -1L'den farklı ise güncellenmiş demektir.
@@ -67,8 +74,10 @@ class DetailViewModel @AssistedInject constructor(
         state= state.copy(isBookmark= isBookmark)
     }
 
-    fun addorUpdateNote() = viewModelScope.launch {
-
+    fun addOrUpdateNote() = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+            addUseCase(note = note)
+        }
     }
 
 }
